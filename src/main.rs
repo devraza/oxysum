@@ -11,11 +11,14 @@ struct Args {
 }
 
 fn hash(input: Vec<u8>) -> String {
-    let characters = "abcdefghijklmnopqrstuvwxyz".chars().collect::<Vec<char>>();
-    let numbers = "0123456789".chars().collect::<Vec<char>>();
-
     let mut hash: u64 = 0;
     let prime: u64 = 67_280_421_310_721;
+
+    let mut rng = StdRng::seed_from_u64(prime);
+
+    let numbers = "0123456789".chars().collect::<Vec<char>>();
+    let mut characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ".chars().collect::<Vec<char>>();
+    characters.shuffle(&mut rng);
 
     for (i, c) in input.iter().enumerate() {
         hash = hash.wrapping_mul(prime).wrapping_add(*c as u64 + i as u64);
@@ -34,7 +37,7 @@ fn hash(input: Vec<u8>) -> String {
         }
     }
 
-    let mut rng = StdRng::seed_from_u64(hash);
+    rng = StdRng::seed_from_u64(hash);
     hash_vector.shuffle(&mut rng);
 
     hash_vector[0..64].iter().collect()
