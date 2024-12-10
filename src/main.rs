@@ -64,5 +64,5 @@ fn main() {
 
     println!("{}", hash(data));
 
-    testing();
+    // testing();
 }
