@@ -17,7 +17,8 @@ fn hash(input: Vec<u8>) -> String {
     let mut rng = StdRng::seed_from_u64(prime);
 
     let numbers = "0123456789".chars().collect::<Vec<char>>();
-    let mut characters = "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ".chars().collect::<Vec<char>>();
+    let mut characters =
+        "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ".chars().collect::<Vec<char>>();
     characters.shuffle(&mut rng);
 
     for (i, c) in input.iter().enumerate() {
