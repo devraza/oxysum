@@ -1,6 +1,6 @@
 use std::fs;
 use clap::Parser;
-use rand::{distributions::Alphanumeric, Rng, SeedableRng, seq::SliceRandom, rngs::StdRng};
+use rand::{distr::Alphanumeric, Rng, SeedableRng, seq::SliceRandom, rngs::StdRng};
 
 /// Hashes a file
 #[derive(Parser, Debug)]
@@ -47,7 +47,7 @@ fn hash(input: Vec<u8>) -> String {
 fn testing() {
     let mut hashes: Vec<String> = vec![];
     for _ in 1..1_000_000 {
-        let s: String = rand::thread_rng()
+        let s: String = rand::rng()
             .sample_iter(&Alphanumeric)
             .take(8)
             .map(char::from)
